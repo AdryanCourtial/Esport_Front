@@ -1,13 +1,58 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Discord OAuth2 App</title>
+</head>
+
+<body>
+  <div id="info">Hoi!</div>
+  <!-- Bouton de connexion -->
+  <a id="login" href="http://localhost:8000/auth/discord">Identify Yourself</a>
+  <!-- Bouton de déconnexion, caché par défaut -->
+  <button id="logout" style="display: none;">Déconnexion</button>
+
+  <script>
+    window.onload = () => {
+      // Vérifier si l'utilisateur est connecté
+      fetch('http://localhost:8000/auth/userinfo', {
+        credentials: 'include' // Inclure les cookies de session pour s'assurer que le backend reconnaît l'utilisateur
+      })
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          throw new Error('Utilisateur non connecté');
+        })
+        .then(userInfo => {
+          // Afficher les informations utilisateur si connecté
+          if (userInfo.username) {
+            document.getElementById('info').innerText = `Bienvenue, ${userInfo.username}`;
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('logout').style.display = 'block'; // Afficher le bouton de déconnexion
+          }
+        })
+        .catch(() => {
+          // Si l'utilisateur n'est pas connecté, afficher le bouton de connexion
+          document.getElementById('login').style.display = 'block';
+        });
+
+      // Gérer la déconnexion
+      document.getElementById('logout').addEventListener('click', () => {
+        fetch('http://localhost:8000/auth/logout', {
+          method: 'POST',
+          credentials: 'include' // Inclure les cookies de session pour que le backend reconnaisse l'utilisateur
+        })
+          .then(() => {
+            // Réinitialiser l'affichage après la déconnexion
+            document.getElementById('info').innerText = "Hoi!";
+            document.getElementById('login').style.display = 'block';
+            document.getElementById('logout').style.display = 'none';
+          })
+          .catch((error) => console.error('Erreur lors de la déconnexion :', error));
+      });
+    };
+  </script>
+</body>
+
 </html>
