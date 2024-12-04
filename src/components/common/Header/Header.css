@@ -1,0 +1,29 @@
+header {
+    width: 100%;
+    height: auto;
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+.item_header {
+    width: auto;
+}
+
+header div img {
+    width: 60px;
+    aspect-ratio: 1/1;
+}
+
+
+.menu_hamberger svg {
+    aspect-ratio: 1/1;
+    height: 40px;
+}
+
+.menu_hamberger svg path {
+    aspect-ratio: 1/1;
+    height: 40px;
+}

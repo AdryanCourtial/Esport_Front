@@ -1,0 +1,11 @@
+@import url('../../../../index.css');
+
+.darkness {
+    z-index: 1000;
+    position: absolute;
+    background-color: var(--drakness-color);
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+}
