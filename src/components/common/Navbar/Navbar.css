@@ -1,0 +1,25 @@
+.navbar {
+    position: absolute;
+    display: flex;
+    background-color: red;
+    z-index: 100;
+
+}
+
+@media (max-width: 767px) {
+    .navbar {
+        width: 100vw;
+        height: fit-content;
+        top: 0;
+        left: 0;
+    }
+}
+
+@media (min-width: 767px) {
+    .navbar {
+        height: 100vh;
+        width: 200px;
+        top: 0;
+        right: 0;
+    }
+}

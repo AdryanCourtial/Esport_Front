@@ -1,4 +1,3 @@
-import React, { useState } from 'react'
 import './Home.css'
 import MainLayout from '../../layouts/MainLayout/MainLayout'
 

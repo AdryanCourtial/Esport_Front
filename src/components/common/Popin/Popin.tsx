@@ -1,6 +1,6 @@
 import './Popin.css'
 import Darkness from './Darkness/Darkness'
-import { Portal } from 'react-portal';
+import  ReactDOM  from 'react-dom'
 
 interface Props {
     children: any
@@ -9,19 +9,15 @@ interface Props {
 
 const Popin: React.FC<Props> = ({ children, setTogglePopin }) => {
 
-    return (
-        <Portal>
+    return ReactDOM.createPortal(
             <div className='Popin'>
-                <div>
-                    <Darkness 
-                    setTogglePopin={setTogglePopin}
-                    />
-                </div>
-                <>
+                <Darkness 
+                setTogglePopin={setTogglePopin}
+                >
                     { children }
-                </>
-            </div>
-        </Portal>
+                </Darkness>
+            </div>,
+        document.body
     )
 }
 

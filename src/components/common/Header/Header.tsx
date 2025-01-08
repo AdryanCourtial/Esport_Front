@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './Header.css'
 import Popin from '../Popin/Popin'
+import Navbar from '../Navbar/Navbar'
+import Darkness from '../Popin/Darkness/Darkness'
 
 const Header: React.FC = () => {
 
@@ -33,11 +35,11 @@ const Header: React.FC = () => {
                 </div>
             </div>
             { togglePopin ? 
-                 <Popin
+                 <Darkness
                  setTogglePopin={setTogglePopin}
                  >
-                     s
-                 </Popin> 
+                    <Navbar></Navbar>
+                 </Darkness> 
  
                  : null }
         </header>

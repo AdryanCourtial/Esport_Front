@@ -2,9 +2,10 @@ import './Darkness.css'
 
 interface Props {
     setTogglePopin: any
+    children: any
 }
 
-const Darkness: React.FC<Props> = ({ setTogglePopin }) => {
+const Darkness: React.FC<Props> = ({ setTogglePopin, children }) => {
 
     const TogglePopin = () => {
         setTogglePopin((previewValue: boolean ) => !previewValue)
@@ -14,7 +15,7 @@ const Darkness: React.FC<Props> = ({ setTogglePopin }) => {
         <div className='darkness'
         onClick={TogglePopin}
         >
-
+            { children }
         </div>
     )
 }
