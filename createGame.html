@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Créer un tournoi</title>
+  </head>
+  <body>
+    <h1>Créer un tournoi</h1>
+    <form id="create-tournament-form">
+      <label for="tournamentName">Nom du tournoi :</label>
+      <input
+        type="text"
+        id="tournamentName"
+        name="tournamentName"
+        required
+      /><br />
+
+      <label for="description">Description :</label>
+      <textarea id="description" name="description" required></textarea><br />
+
+      <label for="gameTypeName">Type de jeu :</label>
+      <select id="gameTypeName" name="gameTypeName" required>
+        <option value="SOLO">SOLO</option>
+        <option value="MULTIPLAYER">MULTIPLAYER</option></select
+      ><br />
+
+      <button type="submit">Créer le tournoi</button>
+    </form>
+
+    <script>
+      document
+        .getElementById("create-tournament-form")
+        .addEventListener("submit", (event) => {
+          event.preventDefault();
+
+          const tournamentName =
+            document.getElementById("tournamentName").value;
+          const description = document.getElementById("description").value;
+          const gameTypeName = document.getElementById("gameTypeName").value;
+
+          if (!tournamentName || !description || !gameTypeName) {
+            alert("Veuillez remplir tous les champs.");
+            return;
+          }
+
+          fetch("http://localhost:8000/game/createGame", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: tournamentName,
+              description: description,
+              gameTypeName: gameTypeName,
+            }),
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error("Erreur lors de la création du tournoi");
+              }
+              return response.json();
+            })
+            .then((data) => {
+              alert("Tournoi créé avec succès !");
+              window.location.href = "http://localhost:5173";
+            })
+            .catch((error) => {
+              console.error("Erreur:", error);
+              alert("Une erreur est survenue lors de la création du tournoi.");
+            });
+        });
+    </script>
+  </body>
+</html>
