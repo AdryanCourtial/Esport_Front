@@ -7,7 +7,6 @@
   <body>
     <div id="info">Hoi!</div>
     <div id="avatar-container">
-      <!-- L'avatar sera affiché ici -->
       <img
         id="avatar"
         alt="Avatar Discord"
@@ -16,11 +15,11 @@
     </div>
 
     <a href="/createGame">creer un tournois</a>
-    <!-- Bouton de connexion -->
+    <a href="/registerGame">Rejoindre un tournois</a>
+
     <a id="login" href="http://localhost:8000/auth/discord"
       >Identify Yourself</a
     >
-    <!-- Bouton de déconnexion, caché par défaut -->
     <button id="logout" style="display: none">Déconnexion</button>
 
     <script>
@@ -38,7 +37,7 @@
             if (userInfo.username) {
               document.getElementById("info").innerText = `
                           Bonjour ${userInfo.username}!
-                          Pseudo Discord: ${userInfo.username}#${userInfo.discriminator}
+                          Pseudo Discord: ${userInfo.username}
                         `;
               const avatarUrl = userInfo.avatar
                 ? `https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.png`
