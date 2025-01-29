@@ -2,8 +2,7 @@
     position: absolute;
     display: flex;
     background-color: red;
-    z-index: 100;
-
+    z-index: 3000;
 }
 
 @media (max-width: 767px) {

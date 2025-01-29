@@ -1,0 +1,1 @@
+export const generateArray = (number: number) => Array.from(Array(number).keys())

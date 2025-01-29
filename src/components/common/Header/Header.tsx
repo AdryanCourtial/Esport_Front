@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import './Header.css'
-import Popin from '../Popin/Popin'
 import Navbar from '../Navbar/Navbar'
 import Darkness from '../Popin/Darkness/Darkness'
 
@@ -10,7 +9,7 @@ const Header: React.FC = () => {
 
     return (
         <header>
-            <div className='item_header' >
+            <div className='item_header'>
                 <img src="/logo-pole-e-sport.png" alt="logo-pole-esport" />
             </div>
             <div className='item_header' >
@@ -27,11 +26,11 @@ const Header: React.FC = () => {
                         y2="2.89822"
                         gradientUnits="userSpaceOnUse"
                     >
-                  <stop stop-color="#A21CAF" />
-                  <stop offset="1" stop-color="#E879F9" />
+                  <stop stopColor="#A21CAF" />
+                  <stop offset="1" stopColor="#E879F9" />
                 </linearGradient>
               </defs>
-              <path d="M4 18L20 18" stroke="url(#gradient-stroke)" stroke-width="2" stroke-linecap="round"/><path d="M4 12L20 12" stroke="url(#gradient-stroke)" stroke-width="2" stroke-linecap="round"/><path d="M4 6L20 6" stroke="url(#gradient-stroke)" stroke-width="2" stroke-linecap="round"/></svg>
+              <path d="M4 18L20 18" stroke="url(#gradient-stroke)" strokeWidth="2" strokeLinecap="round"/><path d="M4 12L20 12" stroke="url(#gradient-stroke)" strokeWidth="2" strokeLinecap="round"/><path d="M4 6L20 6" stroke="url(#gradient-stroke)" strokeWidth="2" strokeLinecap="round"/></svg>
                 </div>
             </div>
             { togglePopin ? 

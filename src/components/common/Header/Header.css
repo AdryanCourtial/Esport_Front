@@ -1,11 +1,10 @@
 header {
-    width: 100%;
+    width: 100vw;
     height: auto;
-    background-color: aqua;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 40px;
 }
 
 .item_header {
