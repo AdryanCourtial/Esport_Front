@@ -6,6 +6,8 @@
 
   <body>
     <div id="info">Hoi!</div>
+    <div id="gameInfo"></div>
+    <!-- Affichage des informations sur les tournois -->
     <div id="avatar-container">
       <img
         id="avatar"
@@ -14,8 +16,10 @@
       />
     </div>
 
-    <a href="/createGame">creer un tournois</a>
-    <a href="/registerGame">Rejoindre un tournois</a>
+    <a href="/createGame" id="create-game-link" style="display: none"
+      >Créer un tournoi</a
+    >
+    <a href="/registerGame">Rejoindre un tournoi</a>
 
     <a id="login" href="http://localhost:8000/auth/discord"
       >Identify Yourself</a
@@ -24,32 +28,67 @@
 
     <script>
       window.onload = () => {
+        // Récupérer les informations de l'utilisateur
         fetch("http://localhost:8000/auth/userinfo", {
           credentials: "include",
         })
           .then((response) => {
             if (response.ok) {
-              return response.json();
+              return response.json(); // Convertit la réponse JSON
             }
             throw new Error("Utilisateur non connecté");
           })
           .then((userInfo) => {
-            if (userInfo.username) {
-              document.getElementById("info").innerText = `
+            // Affiche les informations sur l'utilisateur
+            document.getElementById("info").innerText = `
                           Bonjour ${userInfo.username}!
                           Pseudo Discord: ${userInfo.username}
+                          Role: ${userInfo.role.role}
                         `;
-              const avatarUrl = userInfo.avatar
-                ? `https://cdn.discordapp.com/avatars/${userInfo.id}/${userInfo.avatar}.png`
-                : "https://cdn.discordapp.com/embed/avatars/0.png";
 
-              document.getElementById("avatar").src = avatarUrl;
-              document.getElementById("login").style.display = "none";
-              document.getElementById("logout").style.display = "block";
+            // Affiche l'avatar
+            const avatarUrl = userInfo.avatar
+              ? `https://cdn.discordapp.com/avatars/${userInfo.discordId}/${userInfo.avatar}.png`
+              : "https://cdn.discordapp.com/embed/avatars/0.png";
+            document.getElementById("avatar").src = avatarUrl;
+
+            if (userInfo.role.role === "ADMIN") {
+              document.getElementById("create-game-link").style.display =
+                "block";
             }
+
+            // Gère l'affichage des boutons
+            document.getElementById("login").style.display = "none";
+            document.getElementById("logout").style.display = "block";
           })
           .catch(() => {
             document.getElementById("login").style.display = "block";
+          });
+
+        // Récupérer les tournois disponibles
+        fetch("http://localhost:8000/game/", {
+          credentials: "include",
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json(); // Récupérer les tournois
+            }
+            throw new Error("Erreur lors de la récupération des tournois");
+          })
+          .then((games) => {
+            const gameInfoDiv = document.getElementById("gameInfo");
+            games.forEach((game) => {
+              const gameElement = document.createElement("div");
+              gameElement.innerHTML = `
+                <h3>${game.name}</h3>
+                <p>${game.description}</p>
+                <p>Type de jeu: ${game.gameType.name}</p>
+              `;
+              gameInfoDiv.appendChild(gameElement);
+            });
+          })
+          .catch((error) => {
+            console.error("Erreur lors de la récupération des jeux:", error);
           });
 
         // Gérer la déconnexion
