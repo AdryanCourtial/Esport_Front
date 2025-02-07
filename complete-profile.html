@@ -15,33 +15,67 @@
       <label for="email">Adresse mail :</label>
       <input type="email" id="email" name="email" required /><br />
 
+      <!-- Sélection du secteur -->
+      <label for="sector">Secteur :</label>
+      <select id="sector" name="sector" required>
+        <!-- Les options des secteurs seront injectées ici --></select
+      ><br />
+
       <button type="submit">Soumettre</button>
     </form>
 
     <script>
-      document
-        .getElementById("profile-form")
-        .addEventListener("submit", (event) => {
-          event.preventDefault();
+      window.onload = () => {
+        const sectors = [
+          { id: "1", name: "3D, Animation & Jeux vidéo" },
+          { id: "2", name: "Architecture d'intérieur" },
+          { id: "3", name: "Audiovisuel" },
+          { id: "4", name: "Bâtiment Numérique" },
+          { id: "5", name: "Création & Digital Design" },
+          { id: "6", name: "Cybersécurité" },
+          { id: "7", name: "Illustration" },
+          { id: "8", name: "Informatique" },
+          { id: "9", name: "Intelligence Artificielle & Data" },
+          { id: "10", name: "Marketing & Communication Digitale" },
+          { id: "11", name: "Son & Musique" },
+          { id: "12", name: "Tech & Business" },
+        ];
 
-          const firstName = document.getElementById("firstName").value;
-          const lastName = document.getElementById("lastName").value;
-          const email = document.getElementById("email").value;
+        const sectorSelect = document.getElementById("sector");
 
-          fetch("http://localhost:8000/auth/update-profile", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ firstName, lastName, email }),
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              // Rediriger après la mise à jour du profil
-              window.location.href = "http://localhost:5173";
-            })
-            .catch((error) => console.error("Erreur:", error));
+        sectors.forEach((sector) => {
+          const option = document.createElement("option");
+          option.value = sector.name;
+          option.innerText = sector.name; 
+          sectorSelect.appendChild(option);
         });
+
+        document
+          .getElementById("profile-form")
+          .addEventListener("submit", (event) => {
+            event.preventDefault();
+
+            const firstName = document.getElementById("firstName").value;
+            const lastName = document.getElementById("lastName").value;
+            const email = document.getElementById("email").value;
+            const sector = document.getElementById("sector").value; // Récupérer la valeur du secteur sélectionné
+
+            // Envoi des données via POST
+            fetch("http://localhost:8000/auth/update-profile", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({ firstName, lastName, email, sector }), // Ajouter sector au body
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                // Rediriger après la mise à jour du profil
+                window.location.href = "http://localhost:5173";
+              })
+              .catch((error) => console.error("Erreur:", error));
+          });
+      };
     </script>
   </body>
 </html>

@@ -17,8 +17,8 @@
       <label for="description">Description :</label>
       <textarea id="description" name="description" required></textarea><br />
 
-      <label for="gameTypeName">Type de jeu :</label>
-      <select id="gameTypeName" name="gameTypeName" required>
+      <label for="TournamentTypeName">Type de jeu :</label>
+      <select id="TournamentTypeName" name="TournamentTypeName" required>
         <option value="SOLO">SOLO</option>
         <option value="MULTIPLAYER">MULTIPLAYER</option></select
       ><br />
@@ -35,14 +35,15 @@
           const tournamentName =
             document.getElementById("tournamentName").value;
           const description = document.getElementById("description").value;
-          const gameTypeName = document.getElementById("gameTypeName").value;
+          const TournamentTypeName =
+            document.getElementById("TournamentTypeName").value;
 
-          if (!tournamentName || !description || !gameTypeName) {
+          if (!tournamentName || !description || !TournamentTypeName) {
             alert("Veuillez remplir tous les champs.");
             return;
           }
 
-          fetch("http://localhost:8000/game/createGame", {
+          fetch("http://localhost:8000/tournament/createTournament", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -50,7 +51,7 @@
             body: JSON.stringify({
               name: tournamentName,
               description: description,
-              gameTypeName: gameTypeName,
+              TournamentTypeName: TournamentTypeName,
             }),
             credentials: "include",
           })
