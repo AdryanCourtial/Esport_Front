@@ -7,9 +7,23 @@ interface Props {
     children: string
     variantStyle: 'black' | 'primary'
     redirection: string
+    index: number
 }
 
-const ButtonNavbar: React.FC<Props> = ({ variantStyle, children, redirection } ) => {
+const ButtonNavbar: React.FC<Props> = ({ variantStyle, children, redirection, index } ) => {
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: -100 }, // Départ hors écran
+        visible: (index: any) => ({
+          opacity: 1,
+          y: 0,
+          transition: {
+            duration: 0.5,
+            delay: index * 2, // Décalage progressif des enfants
+          },
+        }),
+      };
+
 
     const chooseVariant = () => {
 
@@ -34,6 +48,8 @@ const ButtonNavbar: React.FC<Props> = ({ variantStyle, children, redirection } )
         <motion.div className="button_sidebar material-bubble font-semibold flex flex-row justify-center items-center h-[50px] cursor-pointer"
         whileHover={{filter: 'brightness(80%)'}}
         style={chooseVariant()}
+        variants={itemVariants}
+        custom={index}
         >
             <NavLink
             to={redirection}

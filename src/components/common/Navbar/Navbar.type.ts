@@ -26,13 +26,13 @@ export const arrayContent: Navbar[] = [
     },
     {
         content: 'Connexion',
-        redirection: '/signin',
+        redirection: '/connexion',
         variants: "primary"
 
     },
     {
         content: 'Inscription',
-        redirection: '/signup',
+        redirection: '/inscription',
         variants: "primary"
     },
 ]

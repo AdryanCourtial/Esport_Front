@@ -1,0 +1,25 @@
+.reseau-icon {
+    aspect-ratio: auto;
+    width: 60px;
+}
+
+.link_info a{
+    text-decoration: underline;
+    color: var(--color-white);
+    font-weight: bold;
+    transition: 0.5 ease-in-out;
+    transition-duration: 1s;
+    text-align: center;
+}
+
+.link_info a:hover{
+    color: var(--color-primary);
+}
+
+.reseau-icon {
+    transition: 0.3s ease-in-out;
+}
+
+.reseau-icon:hover {
+    rotate: 20deg;
+}

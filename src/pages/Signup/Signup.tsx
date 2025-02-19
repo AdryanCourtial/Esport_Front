@@ -1,10 +1,14 @@
 import React from 'react'
+import DiscordButtonForm from '../../components/common/DiscordButtonForm/DIscordButtonForm'
+import MainLayout from '../../layouts/MainLayout/MainLayout'
 
 const Signup: React.FC = () => {
     return (
-        <>
-        JE SUIS LA PAGE DE CONNEXION
-        </>
+        <div>
+            <MainLayout>
+                <DiscordButtonForm />
+            </MainLayout>
+        </div>
     )
 }
 

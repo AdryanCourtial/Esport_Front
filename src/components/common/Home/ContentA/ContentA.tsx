@@ -5,9 +5,9 @@ const ContentA: React.FC = () => {
 
     
     return (
-        <div id='' className="w-full min-h-screen h-auto items-center flex flex-col justify-around relative z-40">
+        <div id='' className="w-full min-h-screen h-auto items-center flex flex-col justify-around relative z-40 mb-12">
 
-            <video id="d" autoPlay muted loop className="absolute w-full h-full: z-10 opacity-10">
+            <video id="d" autoPlay muted loop className="absolute w-full h-full: z-10 opacity-10 mb-14">
                 <source src="/SSBU_Trailer_no_date.mp4" type="video/mp4"/>
             </video>
 

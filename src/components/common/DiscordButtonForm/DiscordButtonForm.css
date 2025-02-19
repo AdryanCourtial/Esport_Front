@@ -1,0 +1,47 @@
+.button-discord:hover {
+    scale: 110%;
+    cursor: pointer;
+}
+
+.button-discord {
+    transition: 1s;
+}
+
+.icon {
+    animation: infinite 2s shake;
+}
+
+@keyframes shake {
+    0% {
+        rotate: 0;
+    }
+    20% {
+        transform: translateY(-50px);
+    }
+    46% {
+        rotate: 0deg;
+    }
+    48% {
+        rotate: 15deg;
+    }
+    50% {
+        rotate: -15deg;
+    }
+    52% {
+        rotate: 15deg;
+    }
+    54%{
+        rotate: -15deg;
+    }
+    54%{
+        rotate: 0deg;
+    }
+    80% {
+        transform: translateY(-50px)
+    }
+    100% {
+        transform: translateY(0)
+    }
+
+
+}

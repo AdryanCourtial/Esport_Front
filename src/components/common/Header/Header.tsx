@@ -13,7 +13,7 @@ const Header: React.FC = () => {
                 <img src="/logo-pole-e-sport.png" alt="logo-pole-esport" />
             </div>
             <div className='item_header' >
-                <div className='menu_hamberger'>
+                <div className='menu_hamberger cursor-pointer'>
                     <svg 
                     onClick={() => setTogglePopin(true)}
                     viewBox="0 0 24 24" fill="red" xmlns="http://www.w3.org/2000/svg">
