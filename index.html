@@ -27,6 +27,10 @@
     >
     <button id="logout" style="display: none">Déconnexion</button>
 
+    <button id="viewTournament" onclick="window.location.href = '/tournament'">
+      Voir les tournois
+    </button>
+
     <script>
       window.onload = () => {
         // Récupérer les informations de l'utilisateur
@@ -35,7 +39,7 @@
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); // Convertir la réponse en JSON
+              return response.json();
             }
             throw new Error("Utilisateur non connecté");
           })
@@ -51,8 +55,9 @@
             document.getElementById("avatar").src = avatarUrl;
 
             if (userInfo.role.role === "ADMIN") {
-              document.getElementById("create-tournament-link").style.display =
-                "block";
+              document.getElementById(
+                "create-tournament-link viewTournament"
+              ).style.display = "block";
             }
 
             document.getElementById("login").style.display = "none";
@@ -62,13 +67,12 @@
             document.getElementById("login").style.display = "block";
           });
 
-        // Récupérer les tournois disponibles et vérifier l'inscription pour chaque tournoi
         fetch("http://localhost:8000/tournament/", {
           credentials: "include",
         })
           .then((response) => {
             if (response.ok) {
-              return response.json(); // Récupérer les tournois
+              return response.json();
             }
             throw new Error("Erreur lors de la récupération des tournois");
           })
@@ -80,11 +84,13 @@
                 <h3>${tournament.name}</h3>
                 <p>${tournament.description}</p>
                 <p>Type de jeu: ${tournament.tournamentType.name}</p>
+                <img src="${tournament.game.image_url}" alt="Image du tournoi" style="width: 100px; height: 100px;"/>
+                <p>${tournament.game.name}</p>
                 <button id="registerButton-${tournament.id}" onclick="toggleRegistration('${tournament.id}')">S'inscrire</button>
+                <a href="/tournament/${tournament.id}">Voir les détails du tournoi</a>
               `;
               tournamentInfoDiv.appendChild(tournamentElement);
 
-              // Vérifiez l'inscription de l'utilisateur au tournoi dès le chargement de la page
               checkRegistrationStatus(tournament.id);
             });
           })
@@ -131,10 +137,10 @@
             );
             if (data.isRegistered) {
               button.innerText = "Se désinscrire";
-              button.onclick = () => unregisterFortournament(tournamentId); // Changer la fonction au clic
+              button.onclick = () => unregisterFortournament(tournamentId);
             } else {
               button.innerText = "S'inscrire";
-              button.onclick = () => registerFortournament(tournamentId); // Changer la fonction au clic
+              button.onclick = () => registerFortournament(tournamentId);
             }
           })
           .catch((error) => {
@@ -155,7 +161,7 @@
           .then((response) => {
             if (response.ok) {
               alert("Inscription réussie !");
-              checkRegistrationStatus(tournamentId); // Mettre à jour le bouton après inscription
+              checkRegistrationStatus(tournamentId);
             } else {
               throw new Error("Erreur lors de l'inscription");
             }
@@ -179,7 +185,7 @@
           .then((response) => {
             if (response.ok) {
               alert("Désinscription réussie !");
-              checkRegistrationStatus(tournamentId); // Mettre à jour le bouton après désinscription
+              checkRegistrationStatus(tournamentId);
             } else {
               throw new Error("Erreur lors de la désinscription");
             }

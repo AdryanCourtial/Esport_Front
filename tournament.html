@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Administration tournois</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      .tournament-card {
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+      .tournament-card h2 {
+        margin-top: 0;
+      }
+      .tournament-card p {
+        color: #555;
+      }
+      .error {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Liste des Tournois</h1>
+
+    <!-- Section pour afficher les tournois -->
+    <div id="tournament-list">
+      <!-- Les tournois seront ajoutés ici dynamiquement -->
+      <p id="loading">Chargement des tournois...</p>
+    </div>
+
+    <script>
+      window.onload = () => {
+        // Faire une requête GET pour récupérer les tournois
+        fetch("http://localhost:8000/tournament/adminTournament", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Erreur lors de la récupération des tournois");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Réponse du serveur : ", data);
+            displayTournaments(data);
+          })
+          .catch((error) => {
+            console.error("Erreur:", error);
+            document.getElementById("loading").innerHTML =
+              "Une erreur est survenue lors du chargement des tournois.";
+          });
+      };
+
+      function displayTournaments(tournaments) {
+        const tournamentList = document.getElementById("tournament-list");
+        tournamentList.innerHTML = "";
+
+        if (tournaments.length === 0) {
+          tournamentList.innerHTML = "<p>Aucun tournoi disponible.</p>";
+        } else {
+          tournaments.forEach((tournament) => {
+            const tournamentCard = document.createElement("div");
+            tournamentCard.classList.add("tournament-card");
+            tournamentCard.innerHTML = `
+              <h2>${tournament.name}</h2>
+              <p><strong>Description :</strong> ${tournament.description}</p>
+              <p><strong>Type de tournoi :</strong> ${tournament.tournamentType.name}</p>
+                <a href="#" onclick="redirectToTournamentDetails('${tournament.id}')">Voir les détails du tournoi</a>
+            <a href="/tournament/${tournament.id}">Voir les détails du tournoi</a>
+            <img src="${tournament.game.image_url}" alt="Image du tournoi" style="width: 100px; height: 100px;"/>
+            <p>${tournament.game.id}</p>
+
+            `;
+            tournamentList.appendChild(tournamentCard);
+          });
+        }
+      }
+
+      const postTournamentDetails = (tournamentId) => {
+        console.log("postTournamentDetails", tournamentId);
+        fetch(`http://localhost:8000/tournament/${tournamentId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+        })
+          .then((response) => {
+            console.log("response", response);
+            if (response.ok) {
+              return response.json();
+            }
+            throw new Error("Erreur lors de la requête");
+          })
+          .then((data) => {
+            console.log("Réponse du serveur : ", data);
+          })
+          .catch((error) => {
+            console.error("Erreur :", error);
+          });
+      };
+
+      const redirectToTournamentDetails = (tournamentId) => {
+        console.log("Redirection vers le tournoi", tournamentId);
+        // Redirection vers la page /tournament/:id
+        window.location.href = `/tournament/${tournamentId}`;
+      };
+    </script>
+  </body>
+</html>

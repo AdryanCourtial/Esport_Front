@@ -23,6 +23,24 @@
         <option value="MULTIPLAYER">MULTIPLAYER</option></select
       ><br />
 
+      <label for="tournamentDate">Date du tournoi :</label>
+      <input
+        type="date"
+        id="tournamentDate"
+        name="tournamentDate"
+        required
+      /><br />
+
+      <!-- Nouveau champ pour le jeu -->
+      <label for="Game">Choisissez un jeu :</label>
+      <select id="Game" name="Game" required>
+        <option value="Rocket League">Rocket League</option>
+        <option value="Valorant">Valorant</option>
+        <option value="League of Legends">League of Legends</option>
+        <option value="Smash Bros Ultimate">Smash Bros Ultimate</option>
+        <option value="Mario Kart">Mario Kart</option></select
+      ><br />
+
       <button type="submit">Créer le tournoi</button>
     </form>
 
@@ -37,8 +55,12 @@
           const description = document.getElementById("description").value;
           const TournamentTypeName =
             document.getElementById("TournamentTypeName").value;
+          const game = document.getElementById("Game").value; // Récupère la valeur du jeu
 
-          if (!tournamentName || !description || !TournamentTypeName) {
+          const tournamentDate =
+            document.getElementById("tournamentDate").value;
+
+          if (!tournamentName || !description || !TournamentTypeName || !game) {
             alert("Veuillez remplir tous les champs.");
             return;
           }
@@ -52,6 +74,8 @@
               name: tournamentName,
               description: description,
               TournamentTypeName: TournamentTypeName,
+              tournamentDate: tournamentDate,
+              Game: game, // Envoie le jeu sélectionné
             }),
             credentials: "include",
           })

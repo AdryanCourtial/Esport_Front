@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Détails du Tournoi</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        margin: 0;
+        padding: 20px;
+      }
+      h1 {
+        color: #333;
+      }
+      .tournament-details {
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Détails du Tournoi</h1>
+
+    <div id="tournament-details" class="tournament-details">
+      <p id="loading">Chargement des détails du tournoi...</p>
+    </div>
+
+    <script>
+      window.onload = () => {
+        // Récupérer l'ID du tournoi depuis l'URL
+        const tournamentId = window.location.pathname.split("/")[2]; // Extraire l'ID du tournoi depuis l'URL
+
+        if (tournamentId) {
+          // Faire une requête GET pour récupérer les détails du tournoi
+          fetch(`http://localhost:8000/tournament/${tournamentId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+          })
+            .then((response) => {
+              if (!response.ok) {
+                throw new Error(
+                  "Erreur lors de la récupération des détails du tournoi"
+                );
+              }
+              return response.json();
+            })
+            .then((data) => {
+              console.log("Réponse du serveur : ", data);
+              displayTournamentDetails(data); // Afficher les détails du tournoi
+            })
+            .catch((error) => {
+              console.error("Erreur:", error);
+              document.getElementById("loading").innerHTML =
+                "Une erreur est survenue lors du chargement des détails du tournoi.";
+            });
+        }
+      };
+
+      // Fonction pour afficher les détails du tournoi
+      function displayTournamentDetails(tournament) {
+        const tournamentDetails = document.getElementById("tournament-details");
+        tournamentDetails.innerHTML = ""; // Réinitialiser la section avant d'ajouter les nouveaux éléments
+
+        if (tournament) {
+          tournamentDetails.innerHTML = `
+            <h2>${tournament.name}</h2>
+            <p><strong>Description :</strong> ${tournament.description}</p>
+            <p><strong>Type de tournoi :</strong> ${tournament.tournamentType.name}</p>
+          `;
+        } else {
+          tournamentDetails.innerHTML =
+            "<p>Aucun détail trouvé pour ce tournoi.</p>";
+        }
+      }
+    </script>
+  </body>
+</html>
