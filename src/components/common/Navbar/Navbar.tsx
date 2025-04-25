@@ -1,6 +1,9 @@
 import ButtonNavbar from './ButtonNavbar/ButtonNavbar'
 import { arrayContent } from './Navbar.type'
 import { motion } from 'motion/react';
+import "./Navbar.css"
+import { useAtom } from 'jotai';
+import { userInfoAtom } from '../../../atoms/userAtom';
 
 const Navbar: React.FC = () => {
 
@@ -14,12 +17,14 @@ const Navbar: React.FC = () => {
         },
       };
     
+    const [userInfo, _] = useAtom(userInfoAtom)
+    
     return (
-        <div className='navbar bg-[#262626] h-auto w-screen md:h-screen md:w-[200px]'
+        <div className='navbar bg-[#262626] h-auto w-screen'
         onClick={(e) => e.stopPropagation()}
         
         >
-            <motion.div className=''
+            <motion.div className='w-full'
             variants={menuVariants}
             initial="hidden"
             animate="visible"
@@ -36,6 +41,26 @@ const Navbar: React.FC = () => {
                             {value.content}
                         </ButtonNavbar>
                     ))
+                    
+                }
+                {
+                    !userInfo ? (
+                        <ButtonNavbar
+                        index={0.01}
+                        redirection={"/login"}
+                        variantStyle={"primary"}
+                        >
+                            {"Connexion"}
+                        </ButtonNavbar>
+                    ) : 
+                    
+                    <ButtonNavbar
+                    index={0.01}
+                    redirection={"/profil"}
+                    variantStyle={"primary"}
+                    >
+                        {"Votre Compte"}
+                    </ButtonNavbar>
                 }
             </motion.div>
         </div>

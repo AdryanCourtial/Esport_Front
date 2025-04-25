@@ -1,0 +1,42 @@
+.container-card {
+    background-color: var(--color-drakness) ;
+    width: 300px;
+    padding: 10px 0;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-shadow: var(--color-drakness) 0px 3px 8px;
+    transition: 0.2s;
+    position: relative;
+}
+
+.container-card:hover {
+    scale: 105%;
+    cursor: pointer;
+}
+
+.container-card:hover::after {
+    content: "En savoir plus";
+    font-weight: 600;
+    font-size: larger;
+    position: absolute;
+    display: flex;
+    z-index: 3;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 100%;
+    border-radius: 10px;
+    width: 100%;
+    background-color: hsla(0, 0%, 0%, 0.3);
+    justify-content: center;
+    align-items: center;
+}
+
+.container-date {
+    display: flex;
+    flex-direction: row;
+    font-size: smaller;
+    align-items: center;
+    gap: 5px;
+}

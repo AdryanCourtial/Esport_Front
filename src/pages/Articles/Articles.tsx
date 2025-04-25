@@ -4,11 +4,11 @@ const Articles: React.FC = () => {
 
     
     return (
-        <div id=''>
-            <MainLayout>
-                Salut
-            </MainLayout>
-        </div>
+        <MainLayout>
+            <div className='min-h-screen'>
+                
+            </div>
+        </MainLayout>
     )
 }
 

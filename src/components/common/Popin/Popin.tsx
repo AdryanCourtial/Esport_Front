@@ -1,9 +1,10 @@
 import './Popin.css'
 import Darkness from './Darkness/Darkness'
 import  ReactDOM  from 'react-dom'
+import { ReactElement } from 'react'
 
 interface Props {
-    children: any
+    children: ReactElement
     setTogglePopin: any
 }
 

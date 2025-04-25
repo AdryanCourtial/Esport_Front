@@ -1,0 +1,8 @@
+.image_discord {
+    transition: 0.5s;
+}
+
+.image_discord:hover {
+    opacity: 0.5;
+    cursor: pointer;
+}

@@ -11,6 +11,32 @@ header {
     width: auto;
 }
 
+.navbar_header {
+    background-color: antiquewhite;
+    width: 100%;
+}
+
+.container_link {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    gap: 50px;
+}
+
+@media screen AND (min-width: 768px) {
+    .menu_hamberger {
+        display: none;
+    }
+}
+
+@media screen AND (max-width: 768px) {
+    .container_link {
+        display: none;
+    }
+}
+
 header div img {
     width: 60px;
     aspect-ratio: 1/1;

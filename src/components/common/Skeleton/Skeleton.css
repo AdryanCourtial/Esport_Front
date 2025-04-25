@@ -1,0 +1,16 @@
+@keyframes wave-squares {
+    0% {
+        opacity: 0.5;
+    }
+     50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.5;
+    }
+}
+
+.skeleton {
+    background-color: var(--grey-color);
+    animation: wave-squares 1.5s infinite
+}

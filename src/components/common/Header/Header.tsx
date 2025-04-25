@@ -2,17 +2,52 @@ import React, { useState } from 'react'
 import './Header.css'
 import Navbar from '../Navbar/Navbar'
 import Darkness from '../Popin/Darkness/Darkness'
+import ButtonHeader from './ButtonHeader/ButtonHeader'
+import { arrayContent } from '../Navbar/Navbar.type'
+import { useAtom } from 'jotai'
+import { userInfoAtom } from '../../../atoms/userAtom'
 
 const Header: React.FC = () => {
 
     const [togglePopin, setTogglePopin] = useState(false)
+
+        const [userInfo, _] = useAtom(userInfoAtom)
+    
 
     return (
         <header>
             <div className='item_header'>
                 <img src="/logo-pole-e-sport.png" alt="logo-pole-esport" />
             </div>
-            <div className='item_header' >
+            {/* Display if screen width > 768px */}
+            <div className='container_link flex-1 h-full'>
+
+                {arrayContent.map((value, index) => (
+                    
+                    <ButtonHeader link={value.redirection} key={index}> {value.content} </ButtonHeader>
+
+                ))}
+
+                {
+                    !userInfo ? (
+
+                        <ButtonHeader
+                        link='/login'
+                        >
+                            Connexion
+                        </ButtonHeader>
+                    ) : 
+                    
+                    <ButtonHeader
+                    link='/profil'
+                    >
+                    Mon Compte
+                    </ButtonHeader>
+                }
+            </div>
+
+            {/* Display if screen width < 768px */}
+            <div className='item_header'>
                 <div className='menu_hamberger cursor-pointer'>
                     <svg 
                     onClick={() => setTogglePopin(true)}

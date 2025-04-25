@@ -1,0 +1,27 @@
+.button_header {
+    transition: 0.3s;
+}
+
+.button_header:hover {
+    color: var(--primary-color);
+}
+
+.container_button_header > hr {
+    transition: 0.5s;
+    animation: 0.5s scale;
+    color: var(--primary-color);
+}
+
+.container_button_header {
+    cursor: pointer;
+}
+
+@keyframes scale {
+    from {
+        scale: 0%;
+    }
+
+    to {
+        scale: 100%;
+    }
+}

@@ -1,8 +1,8 @@
 import React from 'react'
 import './Footer.css'
-import InstagramIcon from '../../../../public/InstagramIcon'
-import TwitchIcon from '../../../../public/TwitchIcon'
-import TwitterIcon from '../../../../public/TwitterIcon'
+import InstagramIcon from '../../../assets/InstagramIcon'
+import TwitchIcon from '../../../assets/TwitchIcon'
+import TwitterIcon from '../../../assets/TwitterIcon'
 
 const Footer: React.FC = () => {
     return (

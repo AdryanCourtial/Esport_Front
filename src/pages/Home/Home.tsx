@@ -9,10 +9,10 @@ const Home: React.FC = () => {
     return (
         <div id='home_page' className='-z-20'>
             <MainLayout>
-                <main>
+                <>
                     <ContentA />
                     <ContentB />
-                </main>
+                </>
             </MainLayout>
         </div>
     )

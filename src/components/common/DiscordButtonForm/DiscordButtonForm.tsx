@@ -1,4 +1,4 @@
-import DiscordIcon from "../../../../public/DiscordIcon"
+import DiscordIcon from "../../../assets/DiscordIcon"
 import './DIscordButtonForm.css'
 
 const DiscordButtonForm = () => {

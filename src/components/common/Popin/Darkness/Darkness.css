@@ -2,7 +2,7 @@
 
 .darkness {
     z-index: 50;
-    position: absolute;
+    position: fixed;
     background-color: var(--drakness-color);
     top: 0;
     left: 0;

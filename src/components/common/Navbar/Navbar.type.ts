@@ -9,12 +9,12 @@ export type VariantsButtonNavbar = 'primary' | 'black';
 export const arrayContent: Navbar[] = [
     {
         content: 'Accueil',
-        redirection: '/',
+        redirection: '/home',
         variants: "black"
     },
     {
         content: 'Nos Tournois',
-        redirection: '/tournois',
+        redirection: '/tournament',
         variants: "black"
 
     },
@@ -23,16 +23,5 @@ export const arrayContent: Navbar[] = [
         redirection: '/articles',
         variants: "black"
 
-    },
-    {
-        content: 'Connexion',
-        redirection: '/connexion',
-        variants: "primary"
-
-    },
-    {
-        content: 'Inscription',
-        redirection: '/inscription',
-        variants: "primary"
-    },
+    }
 ]

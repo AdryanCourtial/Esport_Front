@@ -1,0 +1,13 @@
+.button_cta {
+    border-radius: 20px;
+    background-color: var(--primary-color);
+    padding: 5px 10px;
+    min-width: 100px;
+    border: 1px solid;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.button_cta:hover {
+    opacity: 70%;
+}
